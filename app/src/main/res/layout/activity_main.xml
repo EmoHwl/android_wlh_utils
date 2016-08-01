@@ -7,11 +7,19 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.tool.phontutils.MainActivity">
+    tools:context="com.tool.phoneutils.MainActivity">
 
     <TextView
         android:id="@+id/test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
+
+    <Button
+        android:layout_below="@+id/test"
+        android:layout_marginTop="10dp"
+        android:id="@+id/show_snack_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="snackBar"/>
 </RelativeLayout>
