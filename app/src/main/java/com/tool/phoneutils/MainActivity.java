@@ -4,7 +4,6 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.PixelFormat;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -19,22 +18,18 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidadvance.topsnackbar.TSnackbar;
 import com.tool.phoneutils.Utils.AppInfoUtil;
 import com.tool.phoneutils.Utils.L;
-import com.tool.phoneutils.okhttp3.OkHttpHelper;
-
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.show_snack_bar)
     Button showSnackBar;
 
+    @BindView(R.id.medium)
+    Button mediumBtn;
+
+    @butterknife.BindView(R.id.horizontal_wheel_view)
+    HorizontalWheelView horizontalWheelView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         test = (TextView) findViewById(R.id.test);
         String[] s = getCpuInfo();
-        String deviceInfo =getInfo()+"\n"+getMacAddress()+"\n";
+        String deviceInfo = getInfo() + "\n" + getMacAddress() + "\n";
         for (int i = 0; i < s.length; i++) {
-            deviceInfo += "cpu "+i+" : "+s[i]+"\n";
+            deviceInfo += "cpu " + i + " : " + s[i] + "\n";
         }
         test.setText(deviceInfo);
-        L.d("isRoot"+ AppInfoUtil.exeCmdWithRoot("ls"));
+        L.d("isRoot" + AppInfoUtil.exeCmdWithRoot("ls"));
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -73,52 +75,63 @@ public class MainActivity extends AppCompatActivity {
         showSnackBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TSnackbar mTSnackbar = TSnackbar.make(findViewById(android.R.id.content),"Hello from TSnackBar.", TSnackbar.LENGTH_LONG);
+                TSnackbar mTSnackbar = TSnackbar.make(findViewById(android.R.id.content), "Hello from TSnackBar.", TSnackbar.LENGTH_LONG);
                 View snackbarView = mTSnackbar.getView();
                 mTSnackbar.setActionTextColor(Color.WHITE);
                 mTSnackbar.setIconLeft(R.mipmap.ic_launcher, 24);
                 snackbarView.setBackgroundColor(Color.parseColor("#CC00CC"));
                 TextView textView = (TextView) snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
                 textView.setTextColor(Color.YELLOW);
-                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 mTSnackbar.show();
             }
         });
 
-        getHostName("http://192.168.1.254/FW9660A.bin");
+//        getHostName("http://192.168.1.254/FW9660A.bin");
+
+        initHorizontalView();
     }
-    public static void SnackbarAddView(Snackbar snackbar,int layoutId,int index) {
+
+    private void initHorizontalView() {
+        ArrayList<String> textList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            textList.add("test num "+i);
+        }
+
+        horizontalWheelView.setTexts(textList);
+    }
+
+    public static void SnackbarAddView(Snackbar snackbar, int layoutId, int index) {
         View v = snackbar.getView();//获取snackbar的View(其实就是SnackbarLayout)
         ViewGroup.LayoutParams vl = v.getLayoutParams();
-        CoordinatorLayout.LayoutParams cl = new CoordinatorLayout.LayoutParams(vl.width,vl.height);
+        CoordinatorLayout.LayoutParams cl = new CoordinatorLayout.LayoutParams(vl.width, vl.height);
         cl.gravity = Gravity.TOP;
         v.setBackgroundColor(Color.GREEN);
         v.setLayoutParams(cl);
-        Snackbar.SnackbarLayout snackbarLayout=(Snackbar.SnackbarLayout)v;//将获取的View转换成SnackbarLayout
-        View add_view = LayoutInflater.from(v.getContext()).inflate(layoutId,null);//加载布局文件新建View
-        snackbarLayout.addView(add_view,index);//将新建布局添加进snackbarLayout相应位置
+        Snackbar.SnackbarLayout snackbarLayout = (Snackbar.SnackbarLayout) v;//将获取的View转换成SnackbarLayout
+        View add_view = LayoutInflater.from(v.getContext()).inflate(layoutId, null);//加载布局文件新建View
+        snackbarLayout.addView(add_view, index);//将新建布局添加进snackbarLayout相应位置
     }
 
-    public void showCusToast(){
+    public void showCusToast() {
         LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.warning_layout,null);
+        View layout = inflater.inflate(R.layout.warning_layout, null);
         TextView content = (TextView) layout.findViewById(R.id.toast_content);
         Toast toast = new Toast(MainActivity.this);
-        toast.setGravity(Gravity.TOP,0,0);
+        toast.setGravity(Gravity.TOP, 0, 0);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(layout);
         toast.show();
     }
 
-    public void showFromTop(){
+    public void showFromTop() {
 
     }
 
-    public static String getHostName(String srcUrl){
-        String temp = srcUrl.replace("//","#");
+    public static String getHostName(String srcUrl) {
+        String temp = srcUrl.replace("//", "#");
         String[] splitStr = temp.split("/");
         srcUrl = splitStr[0];
-        srcUrl = srcUrl.replace("#","//");
+        srcUrl = srcUrl.replace("#", "//");
         return srcUrl;
     }
 
@@ -126,35 +139,36 @@ public class MainActivity extends AppCompatActivity {
      * 获取IMEI号，IESI号，手机型号
      */
     private String getInfo() {
-        TelephonyManager mTm = (TelephonyManager)this.getSystemService(TELEPHONY_SERVICE);
+        TelephonyManager mTm = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);
         String imei = mTm.getDeviceId();
         String imsi = mTm.getSubscriberId();
-        String mtype = android.os.Build.MODEL; // 手机型号
-        String mtyb= android.os.Build.BRAND;//手机品牌
+        String mtype = Build.MODEL; // 手机型号
+        String mtyb = Build.BRAND;//手机品牌
         String numer = mTm.getLine1Number(); // 手机号码，有的可得，有的不可得
-        String s= "手机IMEI号："+imei+"\n手机IESI号："+imsi+"\n手机型号："+mtype+"\n手机品牌："+mtyb+"\n手机号码："+numer+"\n"+"分辨率："+getHeightAndWidth()+"\n";
-        String memory = "可用内存："+getAvailMemory()+"\n" + "总共内存："+getTotalMemory();
+        String s = "手机IMEI号：" + imei + "\n手机IESI号：" + imsi + "\n手机型号：" + mtype + "\n手机品牌：" + mtyb + "\n手机号码：" + numer + "\n" + "分辨率：" + getHeightAndWidth() + "\n";
+        String memory = "可用内存：" + getAvailMemory() + "\n" + "总共内存：" + getTotalMemory();
         String abi = "";
         String[] abis;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             abis = Build.SUPPORTED_ABIS;
-        }else{
-            abis = new String[]{Build.CPU_ABI,Build.CPU_ABI2};
+        } else {
+            abis = new String[]{Build.CPU_ABI, Build.CPU_ABI2};
         }
 
 
         for (int i = 0; i < abis.length; i++) {
-            abi += abis[i]+"    ";
+            abi += abis[i] + "    ";
         }
         abi += "\n";
-        Log.i("text", "Build.SUPPORTED_ABIS = "+abi.toString()+s+memory);
-        return  "Build.SUPPORTED_ABIS = "+abi.toString()+s+memory;
+        Log.i("text", "Build.SUPPORTED_ABIS = " + abi.toString() + s + memory);
+        return "Build.SUPPORTED_ABIS = " + abi.toString() + s + memory;
     }
+
     /**
      * .获取手机MAC地址
      * 只有手机开启wifi才能获取到mac地址
      */
-    private String getMacAddress(){
+    private String getMacAddress() {
         String result = "";
         WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
@@ -162,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i("text", "手机macAdd:" + result);
         return result;
     }
+
     /**
      * 手机CPU信息
      */
@@ -232,12 +247,13 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 获得手机屏幕宽高
+     *
      * @return
      */
-    public String getHeightAndWidth(){
-        int width= Resources.getSystem().getDisplayMetrics().widthPixels;
-        int height=Resources.getSystem().getDisplayMetrics().heightPixels;
-        String str=width+" * "+height+"";
+    public String getHeightAndWidth() {
+        int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+        int height = Resources.getSystem().getDisplayMetrics().heightPixels;
+        String str = width + " * " + height + "";
         return str;
     }
 }

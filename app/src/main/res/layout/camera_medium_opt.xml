@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/opt_camera_param_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/player_bg_sheet">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/top_view"/>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/shutter"
+                android:background="@mipmap/shutter_mode_camera"
+                android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/param_show_mark"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/local_picture"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/shutter"
+                android:layout_marginRight="25dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/change_mode"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/shutter"
+                android:background="@mipmap/video_mode_bg"
+                android:layout_marginLeft="25dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:id="@+id/param_mode_change_layout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="手动"
+                android:textSize="15sp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#ffffff"/>
+
+            <ImageView
+                android:id="@+id/camera_left_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/camera_left_btn"/>
+
+            <ImageView
+                android:id="@+id/camera_right_btn"
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/camera_right_btn"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/params_bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/opt_camera_param_layout"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:fadeScrollbars="false"
+                android:scrollbars="none"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/second_camera_param_layout"
+                    android:layout_height="wrap_content">
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal">
+
+                <include
+                    android:id="@+id/param_iso_layout"
+                    layout="@layout/camera_param_layout"></include>
+
+                <include
+                    android:id="@+id/param_wb_layout"
+                    layout="@layout/camera_param_layout"></include>
+
+                <include
+                    android:id="@+id/param_ev_layout"
+                    layout="@layout/camera_param_layout"></include>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

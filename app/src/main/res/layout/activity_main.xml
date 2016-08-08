@@ -22,4 +22,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="snackBar"/>
+
+    <Button
+        android:layout_below="@+id/show_snack_bar"
+        android:layout_marginTop="10dp"
+        android:id="@+id/medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medium"/>
+
+    <com.tool.phoneutils.HorizontalWheelView
+        android:id="@+id/horizontal_wheel_view"
+        android:layout_width="match_parent"
+        android:background="#ffffff"
+        android:layout_below="@+id/medium"
+        android:layout_height="wrap_content" />
+
 </RelativeLayout>
