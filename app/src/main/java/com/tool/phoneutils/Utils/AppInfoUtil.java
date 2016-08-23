@@ -1,4 +1,4 @@
-package com.tool.phoneutils.Utils;
+package com.tool.phoneutils.utils;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

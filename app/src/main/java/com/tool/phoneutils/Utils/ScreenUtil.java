@@ -1,4 +1,4 @@
-package com.tool.phoneutils.Utils;
+package com.tool.phoneutils.utils;
 
 import android.app.Activity;
 import android.content.Context;

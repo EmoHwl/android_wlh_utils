@@ -1,4 +1,4 @@
-package com.tool.phoneutils.Utils;
+package com.tool.phoneutils.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

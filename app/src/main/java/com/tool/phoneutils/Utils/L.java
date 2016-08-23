@@ -1,4 +1,4 @@
-package com.tool.phoneutils.Utils;
+package com.tool.phoneutils.utils;
 
 import android.util.Log;
 
@@ -12,7 +12,7 @@ public class L {
     private static final String TAG = L.class.getName();
     private static final int TARGET_LEVEL = 3;
     private static final boolean IS_DEBUG = true;
-    private static final boolean IS_BUGLY = true;
+    private static final boolean IS_BUGLY = false;
     public L() {
     }
 
