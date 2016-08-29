@@ -9,87 +9,99 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activity.MainActivity">
 
-    <TextView
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <Button
-        android:layout_below="@+id/test"
-        android:layout_marginTop="10dp"
-        android:id="@+id/show_snack_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="snackBar"/>
-
-    <Button
-        android:layout_below="@+id/show_snack_bar"
-        android:layout_marginTop="10dp"
-        android:id="@+id/medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Medium"/>
-
-    <Button
-        android:layout_below="@+id/medium"
-        android:layout_marginTop="10dp"
-        android:id="@+id/horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Horizontal"/>
-
-    <com.tool.phoneutils.cview.HorizontalWheelView
+    <ScrollView
         android:layout_width="match_parent"
-        android:id="@+id/horizontal_wheel_view"
-        android:layout_below="@+id/horizontal"
-        android:layout_height="wrap_content">
-
-    </com.tool.phoneutils.cview.HorizontalWheelView>
-
-    <com.tool.phoneutils.cview.ObservableScrollView
-        android:id="@+id/observable_scroll_view"
-        android:layout_width="match_parent"
-        android:scrollbars="none"
-        android:layout_below="@+id/horizontal_wheel_view"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/linear_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/show_snack_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="snackBar" />
+
+            <Button
+                android:id="@+id/medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/show_snack_bar"
+                android:layout_marginTop="10dp"
+                android:text="Medium" />
+
+            <Button
+                android:id="@+id/horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/medium"
+                android:layout_marginTop="10dp"
+                android:text="Horizontal" />
+
+            <Button
+                android:id="@+id/download_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horizontal"
+                android:text="DOWNLOAD">
+
+            </Button>
+
+            <com.tool.phoneutils.cview.HorizontalWheelView
+                android:id="@+id/horizontal_wheel_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horizontal"
+                android:layout_marginTop="40dp">
+
+            </com.tool.phoneutils.cview.HorizontalWheelView>
+
+            <com.tool.phoneutils.cview.ObservableScrollView
+                android:id="@+id/observable_scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horizontal_wheel_view"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+            </com.tool.phoneutils.cview.ObservableScrollView>
+            <!--
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.tool.phoneutils.cview.CircleImageView
+                        android:id="@+id/circle_image_view"
+                        android:src="@mipmap/picture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            -->
+
+
+            <com.tool.phoneutils.cview.ScrollSelectedView
+                android:id="@+id/scroll_selected_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/observable_scroll_view"
+                android:background="#000000"
+                android:orientation="horizontal"
+                android:scrollbars="none">
+
+            </com.tool.phoneutils.cview.ScrollSelectedView>
 
         </LinearLayout>
-    </com.tool.phoneutils.cview.ObservableScrollView>
-<!--
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <com.tool.phoneutils.cview.CircleImageView
-            android:id="@+id/circle_image_view"
-            android:src="@mipmap/picture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
--->
-
-
-    <com.tool.phoneutils.cview.ScrollSelectedView
-        android:id="@+id/scroll_selected_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/observable_scroll_view"
-        android:orientation="horizontal"
-        android:scrollbars="none"
-        android:background="#000000">
-
-    </com.tool.phoneutils.cview.ScrollSelectedView>
-
-
-
+    </ScrollView>
 </RelativeLayout>

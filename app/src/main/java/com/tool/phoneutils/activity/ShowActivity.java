@@ -21,10 +21,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ShowActivity extends AppCompatActivity {
-
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
-
     private ArrayList<String> stringArrayList = new ArrayList<>();
     private ItemAdapter itemAdapter;
 
@@ -113,9 +111,6 @@ public class ShowActivity extends AppCompatActivity {
             holder.textView.setText(stringArrayList.get(position));
             holder.textView.setTextColor(Color.WHITE);
             textViews.add(position,holder.textView);
-            int[] location = new int[2];
-            holder.textView.getLocationOnScreen(location);
-            L.i(position+"=location = "+location[0]);
             holder.textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

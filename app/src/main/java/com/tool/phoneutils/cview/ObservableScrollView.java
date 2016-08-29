@@ -8,9 +8,7 @@ import android.widget.HorizontalScrollView;
  * Created by wlhuang on 11/08/2016.
  */
 public class ObservableScrollView extends HorizontalScrollView {
-
     private ScrollViewListener scrollViewListener = null;
-
     public ObservableScrollView(Context context) {
         super(context);
     }

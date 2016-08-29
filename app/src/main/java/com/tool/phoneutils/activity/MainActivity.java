@@ -27,11 +27,11 @@ import android.widget.Toast;
 import com.androidadvance.topsnackbar.TSnackbar;
 import com.meetme.android.horizontallistview.sample.MainHorizontalActivity;
 import com.tool.phoneutils.R;
-import com.tool.phoneutils.utils.AppInfoUtil;
-import com.tool.phoneutils.utils.L;
 import com.tool.phoneutils.cview.HorizontalWheelView;
 import com.tool.phoneutils.cview.ObservableScrollView;
 import com.tool.phoneutils.cview.ScrollSelectedView;
+import com.tool.phoneutils.utils.AppInfoUtil;
+import com.tool.phoneutils.utils.L;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -42,52 +42,38 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-
     private static final String TAG = MainActivity.class.getName();
-    @BindView(R.id.test)
-    TextView test;
-
     @BindView(R.id.show_snack_bar)
     Button showSnackBar;
-
     @BindView(R.id.medium)
     Button mediumBtn;
-
     @BindView(R.id.horizontal)
     Button horizontal;
     @BindView(R.id.linear_layout)
     LinearLayout linearLayout;
-
     @BindView(R.id.observable_scroll_view)
     ObservableScrollView observableScrollView;
-
     ArrayList<TextView> textViews = new ArrayList<>();
     @BindView(R.id.horizontal_wheel_view)
     HorizontalWheelView horizontalWheelView;
     @BindView(R.id.scroll_selected_view)
     ScrollSelectedView scrollSelectedView;
+    @BindView(R.id.download_btn)
+    Button downloadBtn;
     private int curSelected = -1;
-
     private int mScrollValue = 0;
     private float mDensityWidth;
-
-    static class TextViewPoi {
-        int x;
-        int oldX;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        test = (TextView) findViewById(R.id.test);
         String[] s = getCpuInfo();
         String deviceInfo = getInfo() + "\n" + getMacAddress() + "\n";
         for (int i = 0; i < s.length; i++) {
             deviceInfo += "cpu " + i + " : " + s[i] + "\n";
         }
-        test.setText(deviceInfo);
         L.d("isRoot" + AppInfoUtil.exeCmdWithRoot("ls"));
 //        new Thread(new Runnable() {
 //            @Override
@@ -117,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         horizontal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, MainHorizontalActivity.class);
+                Intent intent = new Intent(MainActivity.this, CycleActivity.class);
                 startActivity(intent);
             }
         });
@@ -126,10 +112,18 @@ public class MainActivity extends AppCompatActivity {
 //        horizontal.post(new Runnable() {
 //            @Override
 //            public void run() {
-                addInitData();
-                addData();
+        addInitData();
+        addData();
 //            }
 //        });
+
+        downloadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,DownloadActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
