@@ -21,7 +21,7 @@ public class FileService {
      * @return
      */
     public Map<Integer, Integer> getData(String path){
-        SQLiteDatabase db = openHelper.getReadableDatabase();
+        SQLiteDatabase db = openHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery("select threadid, downlength from filedownlog where downpath=?", new String[]{path});
         Map<Integer, Integer> data = new HashMap<Integer, Integer>();
 

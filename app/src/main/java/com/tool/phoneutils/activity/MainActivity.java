@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         downloadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,DownloadActivity.class);
+                Intent intent = new Intent(MainActivity.this,DownloaderActivity.class);
                 startActivity(intent);
             }
         });
