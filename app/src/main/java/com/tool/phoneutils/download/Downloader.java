@@ -1,5 +1,7 @@
 package com.tool.phoneutils.download;
 
+import com.tool.phoneutils.utils.L;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -93,11 +95,15 @@ public class Downloader {
             //Chanel NIO中的用法，由于RandomAccessFile没有使用缓存策略，直接使用会使得下载速度变慢，亲测缓存下载3.3秒的文件，用普通的RandomAccessFile需要20多秒。
             channelOut = randomAccessFile.getChannel();
             // 内存映射，直接使用RandomAccessFile，是用其seek方法指定下载的起始位置，使用缓存下载，在这里指定下载位置。
+            long contentLength = body.contentLength();
+            L.i("contentLength = "+contentLength);
             MappedByteBuffer mappedBuffer = channelOut.map(FileChannel.MapMode.READ_WRITE, startsPoint, body.contentLength());
             byte[] buffer = new byte[1024];
             int len;
+//            randomAccessFile.seek(startsPoint);
             while ((len = in.read(buffer)) != -1) {
                 mappedBuffer.put(buffer, 0, len);
+//                randomAccessFile.write(buffer,0,len);
             }
         } catch (IOException e) {
             e.printStackTrace();

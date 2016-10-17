@@ -30,6 +30,7 @@ import com.tool.phoneutils.R;
 import com.tool.phoneutils.cview.HorizontalWheelView;
 import com.tool.phoneutils.cview.ObservableScrollView;
 import com.tool.phoneutils.cview.ScrollSelectedView;
+import com.tool.phoneutils.download2.PreferencesManager;
 import com.tool.phoneutils.utils.AppInfoUtil;
 import com.tool.phoneutils.utils.L;
 
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < s.length; i++) {
             deviceInfo += "cpu " + i + " : " + s[i] + "\n";
         }
+        PreferencesManager.initializeInstance(this);
         L.d("isRoot" + AppInfoUtil.exeCmdWithRoot("ls"));
 //        new Thread(new Runnable() {
 //            @Override
